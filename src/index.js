@@ -57,6 +57,8 @@ function App() {
   );
 }
 
+// rules for function in react, using Capital and using return
+// never neste the function declaration, still works, but bad ideas, so just declare all component in top level, like this we make pizza function, and call in App
 function Header() {
   return (
     <header className="header">
@@ -69,20 +71,50 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
+
+      <>
+        {/* <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, ricotta cheese"
+        price="20000"
+        photoName="pizzas/spinaci.jpg"
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mushroom"
+        price="20000"
+        photoName="pizzas/funghi.jpg"
+      /> */}
+      </>
     </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
 function Footer() {
   const hour = new Date().getHours();
-  console.log(hour);
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
-  console.log(isOpen);
 
   // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
   // else alert("sorry, we are clossed");
@@ -91,18 +123,6 @@ function Footer() {
     <footer className="footer">
       {new Date().toLocaleDateString()}. We're currently Open!
     </footer>
-  );
-}
-
-// rules for function in react, using Capital and using return
-// never neste the function declaration, still works, but bad ideas, so just declare all component in top level, like this we make pizza function, and call in App
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="spinaci" />
-      <h3>Pizza</h3>
-      <p>Tomato, mozarella, spinach, ricotta cheese</p>
-    </div>
   );
 }
 
